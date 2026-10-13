@@ -1,0 +1,53 @@
+
+    //loginpage
+ const navigate = useNavigate();
+const { register,handleSubmit,formState: { errors }} = useForm();
+const onSubmit = (data) => {
+const users = JSON.parse(localStorage.getItem("users")) || [];
+
+const user = users.find((u) =>
+    u.email === data.email &&
+    u.password === data.password);
+  if (user) {
+  localStorage.setItem(
+    "currentUser",
+    JSON.stringify(user));
+  alert(`Welcome ${user.name}!`);
+  navigate("/");
+  } else {
+  alert("Invalid Email or Password!");}
+  };
+  //signup
+   const {
+      register,
+      handleSubmit,
+      reset,
+      formState: { errors },
+    } = useForm();
+     
+    const navigate = useNavigate();
+  
+    const onSubmit = (data) => {
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+  
+      const existingUser = users.find(
+        (user) => user.email === data.email
+      );
+      if (existingUser) {
+        alert("Email already registered!");
+        return;
+      }
+      users.push(data);
+      localStorage.setItem("users", JSON.stringify(users));
+      alert("Account Created Successfully!");
+      console.log("Saved User:", data);
+      reset();
+      navigate("/login");
+    };
+   //navbar
+   const Navbar = () => {
+ const navigate = useNavigate();
+ const isAuthenticated = !!localStorage.getItem("currentUser");
+ const currentUser = JSON.parse(
+  localStorage.getItem("currentUser")
+);}
